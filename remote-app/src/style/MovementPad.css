@@ -1,0 +1,17 @@
+.movement-pad {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(3, auto);
+    gap: 10px;
+    justify-content: center;
+}
+
+.movement-pad button {
+    padding: 10px;
+    cursor: pointer;
+}  
+
+.movementpad button:nth-child(1) { grid-area: up; }
+.movementpad button:nth-child(2) { grid-area: left; }
+.movementpad button:nth-child(3) { grid-area: right; }
+.movementpad button:nth-child(4) { grid-area: down; }  
