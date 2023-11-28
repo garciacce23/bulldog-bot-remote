@@ -11,6 +11,13 @@ const io = new Server(server);
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, './remote-app/build')));
 
+
+app.get('/get-ip', (req, res) => {
+    const ip = require('ip');
+    res.send({ ip: ip.address() });
+    console.log(`IP: ${ip.address()}`);
+}); 
+
 // The "catchall" handler: for any request that doesn't
 // match one above, send back the index.html file.
 app.get('*', (req, res) => {
@@ -34,5 +41,5 @@ io.on('connection', (socket) => {
 });
 
 server.listen(3000, () => {
-  console.log('listening on *:3000');
+  console.log(`listening on *:3000`);
 });

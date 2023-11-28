@@ -1,16 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import io from 'socket.io-client';
-
 import MovementPad from './component/MovementPad';
+import { Socket } from 'socket.io-client';
 
-const socket = io('http://129.8.203.113:3000');
 
 const App: React.FC = () => {
+  const [socket, setSocket] = useState<Socket | null>(null);
+
+  useEffect(() => {
+    fetch('/get-ip')
+      .then(response => response.json())
+      .then(data => {
+        const newSocket = io(`http://${data.ip}:3000`);
+        setSocket(newSocket);
+      })
+      .catch(error => {
+        console.error('Error fetching IP:', error);
+      });
+  }, []);
+  
+  
+
   const handleDirectionClick = (direction: string) => {
-    console.log(`Direction clicked: ${direction}`);
-    socket.emit('keypress', direction);
+    if (socket) {
+      console.log(`Direction clicked: ${direction}`);
+      socket.emit('keypress', direction);
+    } else {
+      console.log("Socket not initialized");
+    }
   };
 
   return (
@@ -19,6 +38,6 @@ const App: React.FC = () => {
       <MovementPad onDirectionClick={handleDirectionClick} />
     </div>
   );
-}
+};
 
 export default App;
