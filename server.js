@@ -28,7 +28,14 @@ io.on('connection', (socket) => {
     console.log('a user connected');
 
     socket.on('keypress', (key) => {
-        ks.sendKey(key).then(() => {
+        let keyToSend = key;
+        if (key === '.') {
+            keyToSend = 'period';
+        } else if (key === ',') {
+            keyToSend = 'comma';
+        }
+
+        ks.sendKey(keyToSend).then(() => {
             console.log(`Key ${key} pressed`);
         }).catch((err) => {
             console.error(`Error sending key ${key}:`, err);
