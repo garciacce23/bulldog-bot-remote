@@ -66,8 +66,8 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <h1>Control Pad</h1>
-      <MovementPad onDirectionClick={handleDirectionClick} />
+      {/* <h1>Control Pad</h1>
+      <MovementPad onDirectionClick={handleDirectionClick} /> */}
 
       <h1>Joystick</h1>
       <Joystick onJoystickMove={handleJoystickMove} />
