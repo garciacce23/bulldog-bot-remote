@@ -35,8 +35,6 @@ const Joystick: React.FC<JoystickProps> = ({ onJoystickMove }) => {
             };
         }
 
-        // If the container doesn't exist, you might want to handle this case
-        // e.g., by logging an error or setting an error state.
     }, [onJoystickMove]);
 
     return <div id="joystick-container" style={{ width: '200px', height: '200px' }} />;

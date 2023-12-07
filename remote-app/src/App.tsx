@@ -15,32 +15,35 @@ const App: React.FC = () => {
       .then(response => response.json())
       .then(data => {
         const newSocket = io(`http://${data.ip}:3000`);
+        newSocket.on('connect', () => console.log('Connected to server'));
         setSocket(newSocket);
       })
       .catch(error => {
         console.error('Error fetching IP:', error);
       });
-  }, []);
+}, []);
+
   
   const handleJoystickMove = (angle: number, force: number) => {
+    console.log(`Joystick Angle: ${angle}, Force: ${force}`); // Confirm event data
     let direction = '';
 
     if (force === 0) {
-        direction = 'center'; // No movement
+        direction = 'k'; // 'center'; // No movement
     } else if (angle >= 22.5 && angle < 67.5) {
-        direction = 'up-right';
+        direction = 'o'; //'up-right';
     } else if (angle >= 67.5 && angle < 112.5) {
-        direction = 'up';
+        direction = 'i'; // 'up';
     } else if (angle >= 112.5 && angle < 157.5) {
-        direction = 'up-left';
+        direction = 'u'; //'up-left';
     } else if (angle >= 157.5 && angle < 202.5) {
-        direction = 'left';
+        direction = 'j' //'left';
     } else if (angle >= 202.5 && angle < 247.5) {
-        direction = 'down-left';
+        direction = 'm'; //'down-left';
     } else if (angle >= 247.5 && angle < 292.5) {
-        direction = 'down';
+        direction = 'comma'; //'down';
     } else if (angle >= 292.5 && angle < 337.5) {
-        direction = 'down-right';
+        direction = 'period'; //'down-right';
     } else {
         direction = 'right';
     }
