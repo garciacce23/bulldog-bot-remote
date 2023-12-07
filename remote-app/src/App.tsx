@@ -45,7 +45,7 @@ const App: React.FC = () => {
     } else if (angle >= 292.5 && angle < 337.5) {
         direction = 'period'; //'down-right';
     } else {
-        direction = 'right';
+        direction = 'k'; //'center'; // No movement
     }
 
     // Assuming you have a socket instance
